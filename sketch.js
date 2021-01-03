@@ -1,3 +1,4 @@
+
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
@@ -5,7 +6,7 @@ const Body = Matter.Body;
 
 function preload()
 {
-	load = loadImage("dustbingreen.png")
+	d2 = loadImage("dustbingreen.png")
 }
 
 function setup() {
@@ -16,15 +17,17 @@ function setup() {
 	world = engine.world;
 
 	//Create the Bodies Here.
-	ground = Bodies.rectangle(width/2, 675, width, 50, {isStatic:true});
+	ground = Bodies.rectangle(width/2, 675, width, 20, {isStatic:true});
 	World.add(world, ground)
 
-	d = Bodies.rectangle(650, 625, 20, 100, {isStatic: true});
+	d = Bodies.rectangle(700, 625, 20, 80, {isStatic: true});
 	World.add(world, d);
+	d3 = Bodies.rectangle(600, 625, 20, 80, {isStatic: true});
+	World.add(world, d3);
 
 	paper_obj = new Paper(50, 650, 50);
 
-  console.log();
+    console.log();
 
 	Engine.run(engine);
   
@@ -34,20 +37,16 @@ function setup() {
 function draw() {
   rectMode(CENTER);
   Engine.update(engine);
-  background("lightblue");
+  background("skyblue");
   fill("white");
-  image(load, d.position.x - 50, d.position.y - 65, 100, 100);
-  rect(ground.position.x, ground.position.y, width, 20);
   paper_obj.display();
+  rect(ground.position.x, ground.position.y, width, 20);
+//   rect(d.position.x, d.position.y, 100, 80);
+  image(d2, 650 - 50, 625 - 50, 100, 100);
   drawSprites();
 
-  if (keyCode === UP_ARROW) {
-  	for (var i = 0; i < 200; i++) {
-  		if (paper_obj.body.position.x >= d.position.x) {
-  			i = 250;
-  		}
-		paper_obj = new Paper(50 + i, 650, 100);
-	}
+  if (keyWentDown("space")) {
+  	Matter.Body.applyForce(paper_obj.body, paper_obj.body.position, {x:36, y:-38})
   }
 }
 

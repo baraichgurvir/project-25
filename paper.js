@@ -10,8 +10,8 @@ class Paper {
 		this.x = x;
 		this.y = y;
 		this.r = r;
-		this.body = Bodies.circle(x, y, r/2, options);
 		this.image = loadImage("paper.png")
+		this.body = Bodies.circle(x, y, r/2, options);
 		World.add(world, this.body);
 	}
 
@@ -21,7 +21,7 @@ class Paper {
 		rectMode(CENTER)
 		strokeWeight(3);
 		fill(255, 0, 255)
-		image(this.image, 0, 0, this.r, this.r)
+		image(this.image, -12.5, -18.5, this.r, this.r)
 		pop();
 	}
 }
